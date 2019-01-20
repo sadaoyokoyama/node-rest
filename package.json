@@ -1,0 +1,31 @@
+{
+  "name": "app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run test:unit && npm run test:integration",
+    "test:integration": "NODE_ENV=test mocha --opts tests/integration/mocha.opts tests/integration/**/*_spec.js",
+    "test:unit": "NODE_ENV=test mocha --opts tests/unit/mocha.opts tests/unit/**/*_spec.js",
+    "start": "babel-node ./server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-node6": "^11.0.0",
+    "babel-register": "^6.26.0",
+    "chai": "^4.2.0",
+    "mocha": "^5.2.0",
+    "sinon": "^6.3.5",
+    "supertest": "^3.4.1"
+  },
+  "dependencies": {
+    "@types/mongoose": "^5.3.8",
+    "body-parser": "^1.18.3",
+    "config": "^1.29.4",
+    "express": "^4.16.4",
+    "mongoose": "^5.4.5"
+  }
+}
