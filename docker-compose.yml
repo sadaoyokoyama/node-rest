@@ -1,8 +1,11 @@
-version: '2'
+version: '3'
 
 volumes:
-    
-    app-data:
+
+    api-node-mongo:
+        driver: local
+
+    api-node-redis:
         driver: local
 
 services:
@@ -27,7 +30,14 @@ services:
           - MONGO_DATA_DIR=/data/db
           - MONGO_LOG_DIR=/dev/null
         volumes:
-          - app-data:/data/db
+          - api-node-mongo:/data/db
         ports:
             - 27017:27017
-        command: mongod --smallfiles --logpath=/dev/null
+
+    redis:
+        image: redis
+        ports:
+            - "6379:6379"
+        volumes:
+            - api-node-redis:/data
+        command: redis-server

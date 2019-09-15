@@ -1,21 +1,13 @@
 import mongoose from 'mongoose';
 
 const schema = new mongoose.Schema({
-    name: String,
-    email: String,
-    password: String,
-    role: String
+    name: { type: String },
+    email: { type: String },
+    password: { type: String },
+    role: { type: Array },
+    username: { type: String }
 });
 
-schema.set('toJSON', {
-    transform: (doc, ret, options) => ({
-        _id: ret._id,
-        email: ret.email,
-        name: ret.name,
-        role: ret.role
-    })
-});
-
-const User = mongoose.model('User', schema);
+const User = mongoose.model('User', schema, 'User');
 
 export default User;

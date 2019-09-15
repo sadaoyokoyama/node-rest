@@ -1,3 +1,6 @@
+import bcrypt from 'bcrypt';
+import { BCRYPT_SALT } from '../../config/constants';
+
 class UsersController {
     constructor(User) {
         this.User = User;
@@ -12,13 +15,14 @@ class UsersController {
     getById(req, res) {
         const { params: { id } } = req;
     
-        return this.User.find({ _id:id })
+        return this.User.findOne({ _id:id })
             .then(user => res.send(user))
             .catch(err => res.status(400).send(err.message));
     }
 
     create(req, res) {
         const user = new this.User(req.body);
+        user.password = bcrypt.hashSync(user.password, BCRYPT_SALT);
     
         return user.save()
             .then(() => res.status(201).send(user))

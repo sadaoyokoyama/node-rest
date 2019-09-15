@@ -1,11 +1,12 @@
 import mongoose from 'mongoose';
-import config from 'config'
+import bluebird from 'bluebird';
 
-mongoose.Promise = Promise;
+mongoose.Promise = bluebird;
 
-const mongodbUrl = config.get('database.mongoUrl');
-
-const connect = () => mongoose.connect(mongodbUrl);
+const connect = () => mongoose.connect(process.env.DB_URL, { 
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+});
 
 export default {
     connect
